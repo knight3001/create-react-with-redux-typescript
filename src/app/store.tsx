@@ -8,7 +8,7 @@ function configureAppStore() {
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(loggerMiddleware),
-    //preloadedState,
+    // preloadedState,
     enhancers: [monitorReducersEnhancer],
   });
 

@@ -1,21 +1,22 @@
 // @ts-nocheck
-import { PreloadedState, Action, Store } from "@reduxjs/toolkit";
+import { PreloadedState, Action } from "@reduxjs/toolkit";
 import {
   Reducer,
   StoreEnhancerStoreCreator,
-  AnyAction,
   StoreEnhancer,
   DeepPartial,
+  AnyAction,
+  Store,
 } from "redux";
-import { RootState } from "./store";
+import type { RootState } from "./store";
 
 const round = (number: number) => Math.round(number * 100) / 100;
 
 const monitorReducerEnhancer: StoreEnhancer = (
   createStore: StoreEnhancerStoreCreator
 ) => (
-  reducer: Reducer<S, A>,
-  initialState: DeepPartial<S>,
+  reducer: Reducer,
+  initialState: DeepPartial<RootState>,
   enhancer: StoreEnhancer
 ) => {
   const monitoredReducer = (state, action) => {
