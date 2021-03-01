@@ -1,13 +1,5 @@
-import {
-  configureStore,
-  ThunkAction,
-  Action,
-  PreloadedState,
-  Store,
-  EnhancedStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
-//import monitorReducersEnhancer from "./monitorReducer";
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import monitorReducersEnhancer from "./monitorReducer";
 import loggerMiddleware from "./loggerMiddleware";
 import rootReducer from "./reducers";
 
@@ -17,7 +9,7 @@ function configureAppStore() {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(loggerMiddleware),
     //preloadedState,
-    //enhancers: [monitorReducersEnhancer]
+    enhancers: [monitorReducersEnhancer],
   });
 
   if (process.env.NODE_ENV !== "production" && module.hot) {
