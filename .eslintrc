@@ -80,6 +80,12 @@
         "functions": "never"
       }
     ],
-    "no-param-reassign": "warn"
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
   }
 }
