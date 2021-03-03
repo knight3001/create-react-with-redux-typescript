@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import Counter from "./features/counter/Counter";
 import UsersList from "./features/users/UsersList";
+import LoadTodos from "./features/todo/LoadTodos";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <Provider store={store}>
       <Counter />
       <UsersList />
+      <LoadTodos />
     </Provider>
   );
 }
