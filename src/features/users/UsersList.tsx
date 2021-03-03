@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   fetchUsers,
   removeUser,
@@ -11,10 +11,12 @@ import styles from "./UsersList.module.css";
 import type { RootState } from "../../app/store";
 
 function UsersList() {
-  const count = useSelector(selectTotalUsers);
-  const users = useSelector(selectAllUsers);
-  const usersLoading = useSelector((state: RootState) => state.users.loading);
-  const dispatch = useDispatch();
+  const count = useAppSelector(selectTotalUsers);
+  const users = useAppSelector(selectAllUsers);
+  const usersLoading = useAppSelector(
+    (state: RootState) => state.users.loading
+  );
+  const dispatch = useAppDispatch();
 
   return (
     <div>
