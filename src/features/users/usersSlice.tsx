@@ -6,12 +6,20 @@ import {
 import userAPI from "./userAPI";
 import type { RootState } from "../../app/store";
 
+interface UserType {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+}
+
 export const fetchUsers = createAsyncThunk("users/fetchAll", async () => {
   const response = await userAPI.fetchAll();
   return response.data;
 });
 
-export const usersAdapter = createEntityAdapter();
+export const usersAdapter = createEntityAdapter<UserType>();
 
 const initialState = usersAdapter.getInitialState({ loading: false });
 
