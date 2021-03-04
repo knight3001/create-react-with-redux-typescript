@@ -13,10 +13,10 @@ interface LoginUserType {
 interface ThunkAPI {
   dispatch: Function;
   getState: Function;
-  /* eslint-disable  @typescript-eslint/no-explicit-any */
-  extra?: any;
+  extra: { jwt: string };
   requestId: string;
   signal: AbortSignal;
+  rejectedWithValue: boolean;
 }
 
 interface TodoType {
@@ -36,7 +36,7 @@ type TodosState = {
 
   // `error` will contain an error message.
   error: string | null;
-  list: TodoType[];
+  todo: LoginUserType | null;
 };
 
 export function authHeader(): HeadersInit {
@@ -51,23 +51,37 @@ export function authHeader(): HeadersInit {
 }
 
 export const fetchTodos = createAsyncThunk<
-  TodoType[],
+  LoginUserType,
   number,
-  { rejectValue: FetchTodosError }
+  {
+    dispatch: AppDispatch;
+    state: RootState;
+    extra: {
+      jwt: string;
+    };
+    rejectValue: FetchTodosError;
+  }
 >("todos/fetch", async (limit: number, thunkApi) => {
   // const response = await userAPI.fetchAll();
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const response = await fetch(
+    "https://localhost:44348/api/v2/users/authenticate",
+    {
+      headers: {
+        Authorization: `Bearer ${thunkApi.extra.jwt}`,
+      },
+    }
+  );
   if (response.status !== 200) {
     return thunkApi.rejectWithValue({
       message: "Failed to fetch todos.",
     });
   }
-  const data: TodoType[] = await response.json();
+  const data: LoginUserType = await response.json();
   return data;
 });
 
 const initialState: TodosState = {
-  list: [],
+  todo: null,
   error: null,
   status: "idle",
 };
@@ -96,7 +110,7 @@ export const todosSlice = createSlice({
     builder.addCase(fetchTodos.fulfilled, (state, { payload }) => {
       // We add all the new todos into the state
       // and change `status` back to `idle`:
-      state.list.push(...payload);
+      state.todo = payload;
       state.status = "idle";
     });
 
@@ -111,5 +125,6 @@ export const todosSlice = createSlice({
 });
 
 export const selectStatus = (state: RootState) => state.todos.status;
+export const todoError = (state: RootState) => state.todos.error;
 
 export default todosSlice.reducer;

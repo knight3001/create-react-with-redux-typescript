@@ -3,11 +3,19 @@ import monitorReducersEnhancer from "./monitorReducer";
 import loggerMiddleware from "./loggerMiddleware";
 import rootReducer from "./reducers";
 
+const token = localStorage.getItem("jwt");
+
 function configureAppStore() {
   const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(loggerMiddleware),
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: {
+            jwt: token || "",
+          },
+        },
+      }).concat(loggerMiddleware),
     // preloadedState,
     enhancers: [monitorReducersEnhancer],
   });
