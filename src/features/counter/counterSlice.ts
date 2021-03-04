@@ -1,4 +1,12 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  isAnyOf,
+  isAsyncThunkAction,
+  isRejectedWithValue,
+  createAsyncThunk,
+  createAction,
+} from "@reduxjs/toolkit";
 import type { AppThunk, RootState } from "../../app/store";
 
 interface CounterState {
@@ -9,17 +17,33 @@ const initialState: CounterState = {
   value: 0,
 };
 
+export const manualIncrement = createAction<number>("increment/manual");
+
+export const incrementAsync = createAsyncThunk(
+  "incrementAsync",
+  async (amount: number, { rejectWithValue }) => {
+    if (Math.random() < 0.25) {
+      return rejectWithValue({ error: "Random math error" });
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return amount;
+  }
+);
+
+export const anotherAsyncThunk = createAsyncThunk(
+  "anotherAsyncThunk",
+  async () => {
+    console.log("anotherAsyncThunk");
+    return "Hi";
+  }
+);
+
 export const counterSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
-    },
     decrement: (state) => {
       state.value -= 1;
     },
@@ -28,19 +52,29 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        isAnyOf(incrementAsync.fulfilled, manualIncrement),
+        (state, action) => {
+          state.value += action.payload;
+        }
+      )
+      .addMatcher(isRejectedWithValue(incrementAsync), (state, action) => {
+        console.log("Saw a rejected action incrementAsync action!", action);
+      })
+      .addMatcher(
+        isAsyncThunkAction(anotherAsyncThunk, incrementAsync),
+        (state, action) => {
+          console.log(
+            "I match on everything action dispatched by anotherAsyncThunk or incrementAsync regardless of the lifecycle"
+          );
+        }
+      );
+  },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
-export const incrementAsync = (amount: number): AppThunk => (dispatch) => {
-  setTimeout(() => {
-    dispatch(incrementByAmount(amount));
-  }, 1000);
-};
+export const { decrement } = counterSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
