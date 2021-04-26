@@ -71,7 +71,7 @@
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
     "@typescript-eslint/comma-dangle": [
-      "error",
+      "warn",
       {
         "arrays": "only-multiline",
         "objects": "only-multiline",
@@ -86,6 +86,7 @@
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
       }
-    ]
+    ],
+    "jsx-a11y/label-has-associated-control": ["warn"]
   }
 }
