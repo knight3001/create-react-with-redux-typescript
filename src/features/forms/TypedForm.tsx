@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm, NestedValue } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 import {
   TextField,
   Select,
@@ -27,13 +28,17 @@ const Options = [
 
 function TypedForm() {
   const {
+    control,
     register,
     handleSubmit,
     watch,
     setValue,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: { autocomplete: [], select: [] },
+    defaultValues: {
+      autocomplete: [{ label: "Chocolate", value: "chocolate" }],
+      select: [10],
+    },
   });
 
   const select = watch("select");
@@ -50,45 +55,47 @@ function TypedForm() {
   }, [register]);
 
   return (
-    <form onSubmit={onSubmit}>
-      <section>
-        <label>MUI Autocomplete</label>
-        <Autocomplete
-          multiple
-          options={Options}
-          getOptionLabel={(option: Option) => option.label}
-          onChange={(e, options) => setValue("autocomplete", options)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              error={Boolean(errors?.autocomplete)}
-              helperText={errors?.autocomplete?.message}
-            />
-          )}
-        />
-      </section>
-
-      <section>
-        <label>MUI Select</label>
-        <FormControl>
-          <Select
+    <>
+      <form onSubmit={onSubmit}>
+        <section>
+          <label>MUI Autocomplete</label>
+          <Autocomplete
             multiple
-            value={select}
-            onChange={(e) => setValue("select", e.target.value as number[])}
-            error={Boolean(errors?.select)}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-          <FormHelperText error={Boolean(errors?.select)}>
-            {errors?.select?.message}
-          </FormHelperText>
-        </FormControl>
-      </section>
+            options={Options}
+            getOptionLabel={(option: Option) => option.label}
+            onChange={(e, options) => setValue("autocomplete", options)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                error={Boolean(errors?.autocomplete)}
+                helperText={errors?.autocomplete?.message}
+              />
+            )}
+          />
+        </section>
 
-      <input type="submit" />
-    </form>
+        <section>
+          <label>MUI Select</label>
+          <FormControl>
+            <Select
+              multiple
+              value={select}
+              onChange={(e) => setValue("select", e.target.value as number[])}
+              error={Boolean(errors?.select)}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+            <FormHelperText error={Boolean(errors?.select)}>
+              {errors?.select?.message}
+            </FormHelperText>
+          </FormControl>
+        </section>
+
+        <input type="submit" />
+      </form>
+    </>
   );
 }
 

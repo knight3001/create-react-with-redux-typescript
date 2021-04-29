@@ -19,19 +19,29 @@ const schema = yup.object().shape({
   age: yup.number().positive().integer().required().min(10),
 });
 
+const defaultValues = {
+  firstName: "",
+  age: "",
+  iceCreamType: {},
+};
+
 function ReactHookForm() {
   const {
     register,
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>({ resolver: yupResolver(schema) });
+    reset,
+  } = useForm<IFormInput>({
+    defaultValues,
+    resolver: yupResolver(schema),
+  });
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
-      <DevTool control={control} />
+      {process.env.NODE_ENV !== "production" && <DevTool control={control} />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="firstName"
@@ -74,6 +84,9 @@ function ReactHookForm() {
             />
           )}
         />
+        <button type="button" onClick={() => reset({ ...defaultValues })}>
+          Reset
+        </button>
         <input type="submit" />
       </form>
     </>
