@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import StyledTextField from "../../app/components/StyledTextField";
@@ -11,12 +13,18 @@ interface IFormInput {
   iceCreamType: { label: string; value: string };
 }
 
+const schema = yup.object().shape({
+  firstName: yup.string().required().min(4),
+  age: yup.number().positive().integer().required().min(10),
+});
+
 function ReactHookForm() {
   const {
+    register,
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({ resolver: yupResolver(schema) });
   const onSubmit = (data: IFormInput) => console.log(data);
 
   return (
@@ -46,7 +54,9 @@ function ReactHookForm() {
           />
         )}
       />
-      {errors.firstName && "First name is required"}
+      <p>{errors.firstName?.message}</p>
+      <input {...register("age")} />
+      <p>{errors.age?.message}</p>
       <Controller
         name="iceCreamType"
         control={control}
