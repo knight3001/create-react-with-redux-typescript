@@ -1,7 +1,9 @@
 import React from "react";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import StyledTextField from "../../app/components/StyledTextField";
 
 interface IFormInput {
   firstName: string;
@@ -26,10 +28,20 @@ function ReactHookForm() {
         defaultValue=""
         rules={{ required: true }}
         render={({ field }) => (
-          <TextField
-            id="filled-basic"
+          <StyledTextField
+            name="filled-basic"
             label="Filled"
-            variant="filled"
+            isRequired
+            isInvalid
+            onEnter={() => console.log("blur")}
+            helper="2323 232 323"
+            rows={4}
+            width="300px"
+            startAdornment={
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            }
             {...field}
           />
         )}
