@@ -5,6 +5,7 @@ import Counter from "./features/counter/Counter";
 import UsersList from "./features/users/UsersList";
 import LoadTodos from "./features/todo/LoadTodos";
 import ReactHookForm from "./features/forms/ReactHookForm";
+import ReactFormik from "./features/forms/Formik";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <UsersList />
       <LoadTodos />
       <ReactHookForm />
+      <ReactFormik />
     </Provider>
   );
 }
