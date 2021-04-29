@@ -157,7 +157,7 @@ interface StyledTextFieldPropsType {
   autoCompleteOff?: boolean;
 }
 
-const defaultProps = {
+const defaultProps: Partial<StyledTextFieldPropsType> = {
   isRequired: false,
   isInvalid: false,
   isAutoFocus: false,
@@ -174,9 +174,9 @@ const defaultProps = {
   autoCompleteOff: false,
 };
 
-const StyledTextField: FunctionComponent<{
-  props: StyledTextFieldPropsType;
-}> = (props = defaultProps) => {
+const StyledTextField: FunctionComponent<StyledTextFieldPropsType> = (
+  props = defaultProps
+) => {
   const classes = useStyles();
 
   return (
