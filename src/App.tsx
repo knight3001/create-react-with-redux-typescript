@@ -8,6 +8,7 @@ import ReactHookForm from "./features/forms/ReactHookForm";
 import ReactFormik from "./features/forms/Formik";
 import TypedForm from "./features/forms/TypedForm";
 import VitualTree from "./features/forms/VirtualTree";
+import Transform from "./features/forms/Transform";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <ReactHookForm />
       <ReactFormik />
       <TypedForm />
+      <Transform />
       <VitualTree />
     </Provider>
   );
