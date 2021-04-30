@@ -88,6 +88,13 @@
       }
     ],
     "jsx-a11y/label-has-associated-control": ["warn"],
-    "radix": "warn"
+    "radix": "warn",
+    "react/require-default-props": [
+      "error",
+      {
+        "forbidDefaultForRequired": false,
+        "ignoreFunctionalComponents": true
+      }
+    ]
   }
 }

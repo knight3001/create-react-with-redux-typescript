@@ -43,7 +43,7 @@ const ControllerPlus = <TInput extends string, TOutput>({
   };
   name: FieldPath<FormValues>;
   control: Control<FormValues>;
-  defaultValue: string;
+  defaultValue?: TInput;
 }) => (
   <Controller
     defaultValue={defaultValue}
