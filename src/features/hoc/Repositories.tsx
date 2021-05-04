@@ -20,5 +20,5 @@ function Repositories({ loading, results, error }) {
 }
 
 export default DataFetchingHOC({
-  dataSource: "https://api.github.com/users/royderks/repos",
+  dataSource: "https://api.github.com/users/knight3001/repos",
 })(Repositories);

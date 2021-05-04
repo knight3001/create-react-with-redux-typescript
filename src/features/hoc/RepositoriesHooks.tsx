@@ -3,7 +3,7 @@ import useDataFetching from "../../app/global/useDataFetching";
 
 function RepositoriesHooks() {
   const { loading, results, error } = useDataFetching(
-    "https://api.github.com/users/royderks/repos"
+    "https://api.github.com/users/knight3001/repos"
   );
 
   if (loading || error) {
