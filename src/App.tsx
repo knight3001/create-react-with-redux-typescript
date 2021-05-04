@@ -9,6 +9,8 @@ import ReactFormik from "./features/forms/Formik";
 import TypedForm from "./features/forms/TypedForm";
 import VitualTree from "./features/forms/VirtualTree";
 import Transform from "./features/forms/Transform";
+import Repositories from "./features/hoc/Repositories";
+import RepositoriesHooks from "./features/hoc/RepositoriesHooks";
 import "./App.css";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
       <TypedForm />
       <Transform />
       <VitualTree />
+      <Repositories />
+      <RepositoriesHooks />
     </Provider>
   );
 }
