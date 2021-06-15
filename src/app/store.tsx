@@ -1,7 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import monitorReducerEnhancer from "./monitorReducer";
 import loggerMiddleware from "./loggerMiddleware";
 import rootReducer from "./reducers";
+import { pokemanApi } from "../services/pokemon";
 
 const token = localStorage.getItem("jwt");
 
@@ -15,7 +17,9 @@ function configureAppStore() {
             jwt: token || "",
           },
         },
-      }).concat(loggerMiddleware),
+      })
+        .concat(loggerMiddleware)
+        .concat(pokemanApi.middleware),
     // preloadedState,
     enhancers: [monitorReducerEnhancer],
   });
@@ -28,6 +32,8 @@ function configureAppStore() {
 }
 
 const store = configureAppStore();
+
+setupListeners(store.dispatch);
 
 export default store;
 

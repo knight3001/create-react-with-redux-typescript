@@ -90,6 +90,7 @@ const navs = [
   { url: "/forms", text: "Forms" },
   { url: "/hoc", text: "Hoc" },
   { url: "/calendar", text: "Calendar" },
+  { url: "/rtkquery", text: "RTK Query" },
 ];
 
 function ListItemLink(props) {
