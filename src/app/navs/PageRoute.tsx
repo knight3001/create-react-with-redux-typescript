@@ -19,7 +19,7 @@ import Transform from "../../features/forms/Transform";
 import Repositories from "../../features/hoc/Repositories";
 import RepositoriesHooks from "../../features/hoc/RepositoriesHooks";
 import FullCalendarDemo from "../../features/calendars/FullCalendar";
-import RTKBaseSample from "../../features/rtkquery/BaseSample";
+import RTKBaseSample from "../../features/rtkquery/RTKBaseSample";
 
 const FormPage = () => (
   <>

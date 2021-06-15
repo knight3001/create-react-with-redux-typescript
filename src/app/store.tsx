@@ -3,7 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import monitorReducerEnhancer from "./monitorReducer";
 import loggerMiddleware from "./loggerMiddleware";
 import rootReducer from "./reducers";
-import { pokemanApi } from "../services/pokemon";
+import { pokemonApi } from "../services/pokemon";
 
 const token = localStorage.getItem("jwt");
 
@@ -19,7 +19,7 @@ function configureAppStore() {
         },
       })
         .concat(loggerMiddleware)
-        .concat(pokemanApi.middleware),
+        .concat(pokemonApi.middleware),
     // preloadedState,
     enhancers: [monitorReducerEnhancer],
   });

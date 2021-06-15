@@ -1,9 +1,19 @@
 import * as React from "react";
 import { useGetPokemonByNameQuery } from "../../services/pokemon";
 
-function RTKBaseSample() {
+interface PokemonProps {
+  name: string;
+  pollingInterval: nunber;
+}
+
+function Pokemon(props: PokemonProps) {
   // Using a query hook automatically fetches data and returns query values
-  const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
+  const { data, error, isLoading, isFetching } = useGetPokemonByNameQuery(
+    props.name,
+    {
+      pollingInterval: props.pollingInterval,
+    }
+  );
 
   if (error) {
     return <>Oh no, there was an error</>;
@@ -16,7 +26,10 @@ function RTKBaseSample() {
   if (data) {
     return (
       <>
-        <h3>{data.species.name}</h3>
+        <h3>
+          {data.species.name}
+          {isFetching ? "..." : ""}
+        </h3>
         <img src={data.sprites.front_shiny} alt={data.species.name} />
       </>
     );
@@ -24,4 +37,4 @@ function RTKBaseSample() {
   return null;
 }
 
-export default RTKBaseSample;
+export default Pokemon;
