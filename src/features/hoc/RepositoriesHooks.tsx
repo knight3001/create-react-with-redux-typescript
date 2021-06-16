@@ -7,7 +7,7 @@ function RepositoriesHooks() {
   );
 
   if (loading || error) {
-    return loading ? "Loading..." : error.message;
+    return loading ? <span>Loading...</span> : <span>{error}</span>;
   }
 
   return (

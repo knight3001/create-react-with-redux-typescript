@@ -1,8 +1,14 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import { VariableSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import "../../styles/tree.css";
+
+interface WindowedRowProps {
+  index: number;
+  style: CSSProperties;
+  data: { title: string }[];
+}
 
 const items = Array.from(Array(1000).keys()).map((i) => ({
   title: `List ${i}`,
@@ -10,7 +16,7 @@ const items = Array.from(Array(1000).keys()).map((i) => ({
 }));
 
 // In a bigger project, this would be a seperate component.
-const WindowedRow = React.memo(({ index, style, data }) => {
+const WindowedRow = React.memo<WindowedRowProps>(({ index, style, data }) => {
   const { register } = useFormContext();
   const qtyKey = `${index}.quantity`;
 
@@ -23,7 +29,7 @@ const WindowedRow = React.memo(({ index, style, data }) => {
 });
 
 const VitualTree = () => {
-  const onSubmit = (data) => {
+  const onSubmit = (data: { title: string }[]) => {
     console.log(data);
   };
 

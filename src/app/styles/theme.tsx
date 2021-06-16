@@ -7,7 +7,7 @@ const basePalette = {
   },
   error: {
     main: "#ff0000",
-    contrast: "#008000",
+    contrastText: "#008000",
   },
 };
 
@@ -52,14 +52,12 @@ const baseTheme = createMuiTheme({
 
 export const myTheme = createMuiTheme({
   ...baseTheme,
-  themeName: "myTheme",
   palette: {
     ...basePalette,
     primary: {
       light: "#479bba",
       main: "#1a83a9",
       dark: "#146887",
-      third: "#75b4cb",
       contrastText: "#ffffff",
     },
     secondary: {

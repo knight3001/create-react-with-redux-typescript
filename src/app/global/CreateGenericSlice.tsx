@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  SliceCaseReducers,
+  ValidateSliceCaseReducers,
+} from "@reduxjs/toolkit";
 
-interface GenericState<T> {
+export interface GenericState<T> {
   data?: T;
   status: "loading" | "finished" | "error";
 }

@@ -3,7 +3,7 @@ import { useGetPokemonByNameQuery } from "../../services/pokemon";
 
 interface PokemonProps {
   name: string;
-  pollingInterval: nunber;
+  pollingInterval: number;
 }
 
 function Pokemon(props: PokemonProps) {

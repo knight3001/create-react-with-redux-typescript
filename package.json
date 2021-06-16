@@ -62,10 +62,14 @@
     "react-window": "^1.8.6",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "typescript": "~3.8.2",
+    "typescript": "~4.3.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
+    "@types/react-select": "^4.0.15",
+    "@types/react-virtualized-auto-sizer": "^1.0.0",
+    "@types/react-window": "^1.8.3",
     "@typescript-eslint/eslint-plugin": "4.15.2",
     "@typescript-eslint/parser": "4.15.2",
     "babel-eslint": "10.1.0",

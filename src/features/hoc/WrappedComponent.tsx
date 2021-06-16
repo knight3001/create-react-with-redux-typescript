@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   start,
@@ -22,7 +22,7 @@ function WrappedComponent() {
         <button type="button" onClick={() => dispatch(magic())}>
           Magic
         </button>
-        <button type="button" onClick={() => dispatch(success())}>
+        <button type="button" onClick={() => dispatch(success("yes ok"))}>
           Success
         </button>
       </div>

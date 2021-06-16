@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { ReactNode } from "react";
 import { withRouter } from "react-router-dom";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
@@ -8,7 +8,7 @@ import Menu from "./Menu";
 import { myTheme } from "../styles/theme";
 
 type TemplatePropsType = {
-  children: React$Element<T>;
+  children?: ReactNode;
 };
 
 function Template(props: TemplatePropsType) {

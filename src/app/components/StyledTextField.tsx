@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, ReactNode } from "react";
 import classNames from "classnames";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const inputStyles = (theme: DictionaryType): DictionaryType => ({
+const inputStyles = (theme: Theme) => ({
   labelFormControl: {
     paddingLeft: "30px",
     fontSize: "0.9375rem",
@@ -20,7 +20,7 @@ const inputStyles = (theme: DictionaryType): DictionaryType => ({
       color: theme.palette.error.main,
     },
     "&$labelDisabled": {
-      color: theme.palette.grey.main,
+      color: theme.palette.grey["500"],
     },
   },
   greenLabel: {
@@ -32,7 +32,7 @@ const inputStyles = (theme: DictionaryType): DictionaryType => ({
       color: theme.palette.error.main,
     },
     "&$labelDisabled": {
-      color: theme.palette.grey.main,
+      color: theme.palette.grey["500"],
     },
   },
   labelFocused: {},
@@ -45,7 +45,7 @@ const inputStyles = (theme: DictionaryType): DictionaryType => ({
   inputRootWhite: {
     color: theme.palette.primary.contrastText,
     "&$inputDisabled": {
-      color: theme.palette.grey.main,
+      color: theme.palette.grey["500"],
     },
     "&$inputError": {
       "&:after": {
@@ -56,7 +56,7 @@ const inputStyles = (theme: DictionaryType): DictionaryType => ({
   inputRootGreen: {
     color: theme.palette.common.black,
     "&$inputDisabled": {
-      color: theme.palette.grey.main,
+      color: theme.palette.grey["500"],
     },
     "&$inputError": {
       "&:after": {
@@ -130,48 +130,53 @@ const inputStyles = (theme: DictionaryType): DictionaryType => ({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   ...inputStyles(theme),
 }));
 
 interface StyledTextFieldPropsType {
-  label: string;
+  label?: string;
   name: string;
   value: string;
-  inpuType: string;
-  onChange: Function;
+  inpuType?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   isRequired?: boolean;
   isInvalid?: boolean;
   isAutoFocus?: boolean;
   isDisabled?: boolean;
-  onBlur?: Function;
-  onFocus?: Function;
-  onEnter?: Function;
-  endAdornment?: React$Element<T>;
-  startAdornment?: React$Element<T>;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onEnter?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  endAdornment?: ReactNode;
+  startAdornment?: ReactNode;
   helper?: string;
   rows?: number;
   width?: string;
-  inputComponent?: React$Element<T>;
+  inputComponent?: FunctionComponent;
   placeholder?: string;
   autoCompleteOff?: boolean;
 }
 
-const defaultProps: Partial<StyledTextFieldPropsType> = {
+const defaultProps: StyledTextFieldPropsType = {
   isRequired: false,
   isInvalid: false,
   isAutoFocus: false,
   isDisabled: false,
-  onBlur: null,
-  onFocus: null,
-  onEnter: null,
-  endAdornment: null,
-  startAdornment: null,
-  helper: null,
+  onBlur: undefined,
+  onFocus: undefined,
+  onEnter: undefined,
+  onChange: undefined,
+  endAdornment: undefined,
+  startAdornment: undefined,
+  helper: "",
   rows: 0,
-  width: 0,
+  width: "",
   placeholder: "",
   autoCompleteOff: false,
+  label: "",
+  name: "",
+  value: "",
+  inpuType: "text",
 };
 
 const StyledTextField: FunctionComponent<StyledTextFieldPropsType> = (
@@ -225,10 +230,10 @@ const StyledTextField: FunctionComponent<StyledTextFieldPropsType> = (
           autoComplete: props.autoCompleteOff ? "new-password" : "on",
         }}
         autoFocus={props.isAutoFocus}
-        onKeyPress={(ev: SyntheticKeyboardEvent<T>) => {
+        onKeyPress={(ev: React.KeyboardEvent<HTMLInputElement>) => {
           if (props.onEnter !== undefined) {
             if (ev.key === "Enter") {
-              props.onEnter();
+              props.onEnter(ev);
               ev.preventDefault();
             }
           }
