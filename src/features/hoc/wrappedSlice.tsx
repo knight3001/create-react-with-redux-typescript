@@ -1,4 +1,6 @@
-import createGenericSlice from "../../app/global/CreateGenericSlice";
+import createGenericSlice, {
+  GenericState,
+} from "../../app/global/CreateGenericSlice";
 import type { AppThunk, RootState } from "../../app/store";
 
 export const wrappedSlice = createGenericSlice({

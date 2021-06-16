@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import classnames from "classnames";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -18,6 +18,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { SvgIconProps } from "@material-ui/core/SvgIcon";
 
 const drawerWidth = 240;
 
@@ -93,12 +94,22 @@ const navs = [
   { url: "/rtkquery", text: "RTK Query" },
 ];
 
-function ListItemLink(props) {
+interface ListItemLinkProps {
+  icon: SvgIconProps;
+  text: string;
+  url: string;
+}
+
+interface MenuProps {
+  children: ReactNode;
+}
+
+function ListItemLink(props: ListItemLinkProps) {
   const { icon, text, url } = props;
 
   const renderLink = React.useMemo(
     () =>
-      React.forwardRef((itemProps, ref) => (
+      React.forwardRef<HTMLAnchorElement>((itemProps, ref) => (
         <RouterLink to={url} ref={ref} {...itemProps} />
       )),
     [url]
@@ -112,7 +123,7 @@ function ListItemLink(props) {
   );
 }
 
-function Menu(props) {
+function Menu(props: MenuProps) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);

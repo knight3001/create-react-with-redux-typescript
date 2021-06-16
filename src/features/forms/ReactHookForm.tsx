@@ -12,6 +12,7 @@ interface IFormInput {
   firstName: string;
   lastName: string;
   iceCreamType: { label: string; value: string };
+  age: string;
 }
 
 const schema = yup.object().shape({
@@ -50,7 +51,6 @@ function ReactHookForm() {
           rules={{ required: true }}
           render={({ field }) => (
             <StyledTextField
-              name="filled-basic"
               label="Filled"
               isRequired
               isInvalid

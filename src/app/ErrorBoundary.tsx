@@ -1,39 +1,35 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import React, { Component, ErrorInfo, ReactNode } from "react";
 
-type ErrorBoundaryStatesType = {
+interface Props {
+  children: ReactNode;
+}
+
+interface State {
   hasError: boolean;
-};
+}
 
-type ErrorBoundaryPropsType = {
-  children: React$Node;
-};
-
-class ErrorBoundary extends Component<
-  ErrorBoundaryPropsType,
-  ErrorBoundaryStatesType
-> {
-  constructor(props: ErrorBoundaryPropsType) {
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       hasError: false,
     };
   }
 
-  componentDidCatch(error: T, info: T) {
-    // Display fallback UI
-    this.setState({ hasError: true });
-    // You can also log the error to an error reporting service
-    console.log(error, info);
+  static getDerivedStateFromError(_: Error): State {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
   }
 
-  render(): T {
-    const { classes } = this.props;
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <Typography>Error happend!</Typography>;
+      return <h1>Sorry.. there was an error</h1>;
     }
+
     return this.props.children;
   }
 }
