@@ -1,17 +1,21 @@
 import React from "react";
-import FullCalendar, { sliceEvents, createPlugin } from "@fullcalendar/react";
+import FullCalendar, {
+  sliceEvents,
+  createPlugin,
+  EventContentArg,
+} from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
+import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
 
 function FullCalendarDemo() {
-  const handleDateClick = (arg) => {
+  const handleDateClick = (arg: DateClickArg) => {
     // bind with an arrow function
     console.log(arg);
   };
 
-  const renderEventContent = (eventInfo) => {
+  const renderEventContent = (eventInfo: EventContentArg) => {
     console.log(eventInfo);
     return (
       <>

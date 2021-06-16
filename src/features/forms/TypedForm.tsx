@@ -47,10 +47,10 @@ function TypedForm() {
 
   React.useEffect(() => {
     register("autocomplete", {
-      validate: (value) => value.length || "This is required.",
+      validate: (value) => !!value.length || "This is required.",
     });
     register("select", {
-      validate: (value) => value.length || "This is required.",
+      validate: (value) => !!value.length || "This is required.",
     });
   }, [register]);
 

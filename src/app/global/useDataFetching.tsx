@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function useDataFetching(dataSource) {
+function useDataFetching(dataSource: string) {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
