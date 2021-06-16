@@ -1,9 +1,19 @@
 import React from "react";
 import DataFetchingHOC from "../../app/global/DataFetchingHOC";
 
-function Repositories({ loading, results, error }) {
+interface Props {
+  loading: boolean;
+  results: {
+    id: number;
+    html_url: string;
+    full_name: string;
+  }[];
+  error: string;
+}
+
+function Repositories({ loading, results, error }: Props) {
   if (loading || error) {
-    return loading ? "Loading..." : error.message;
+    return loading ? "Loading..." : error;
   }
 
   return (
