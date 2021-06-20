@@ -3,6 +3,7 @@ import {
   PayloadAction,
   SliceCaseReducers,
   ValidateSliceCaseReducers,
+  current,
 } from "@reduxjs/toolkit";
 
 export interface GenericState<T> {
@@ -39,6 +40,7 @@ const createGenericSlice = <
       success(state: GenericState<T>, action: PayloadAction<T>) {
         state.data = action.payload;
         state.status = "finished";
+        console.log(current(state));
       },
       ...reducers,
     },
