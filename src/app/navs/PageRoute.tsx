@@ -21,6 +21,7 @@ import RepositoriesHooks from "../../features/hoc/RepositoriesHooks";
 import FullCalendarDemo from "../../features/calendars/FullCalendar";
 import RTKBaseSample from "../../features/rtkquery/RTKBaseSample";
 import WrappedComponent from "../../features/hoc/WrappedComponent";
+import PostsList from "../../features/rtkquery/PokemonList";
 
 const FormPage = () => (
   <>
@@ -40,6 +41,13 @@ const HocPage = () => (
   </>
 );
 
+const RTCPage = () => (
+  <>
+    <RTKBaseSample />
+    <PostsList />
+  </>
+);
+
 const PageRoute = () => (
   <BrowserRouter basename="">
     <Template>
@@ -50,7 +58,7 @@ const PageRoute = () => (
         <Route path="/forms" component={FormPage} />
         <Route path="/hoc" component={HocPage} />
         <Route path="/calendar" component={FullCalendarDemo} />
-        <Route path="/rtkquery" component={RTKBaseSample} />
+        <Route path="/rtkquery" component={RTCPage} />
         <Redirect to="/counter" />
       </Switch>
     </Template>
