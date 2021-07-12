@@ -2,6 +2,7 @@
   "name": "redux-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,6 +28,7 @@
     "extends": "react-app"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.6.4",
     "@fullcalendar/core": "^5.6.0",
     "@fullcalendar/daygrid": "^5.6.0",
     "@fullcalendar/interaction": "^5.6.0",
@@ -39,6 +41,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/styles": "^4.11.3",
+    "@mswjs/data": "^0.3.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -51,9 +54,12 @@
     "@types/webpack-env": "^1.16.0",
     "classnames": "^2.3.1",
     "formik": "^2.2.6",
+    "framer-motion": "^4.1.17",
+    "msw": "^0.30.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^7.2.3",
+    "react-icons": "^4.2.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -87,5 +93,8 @@
     "prettier": "2.2.1",
     "prettier-eslint": "12.0.0",
     "prettier-eslint-cli": "5.0.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
