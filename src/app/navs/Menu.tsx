@@ -92,6 +92,7 @@ const navs = [
   { url: "/hoc", text: "Hoc" },
   { url: "/calendar", text: "Calendar" },
   { url: "/rtkquery", text: "RTK Query" },
+  { url: "/rtkmutation", text: "RTK Mutation" },
 ];
 
 interface ListItemLinkProps {

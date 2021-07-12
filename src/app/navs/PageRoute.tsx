@@ -22,6 +22,8 @@ import FullCalendarDemo from "../../features/calendars/FullCalendar";
 import RTKBaseSample from "../../features/rtkquery/RTKBaseSample";
 import WrappedComponent from "../../features/hoc/WrappedComponent";
 import PostsList from "../../features/rtkquery/PokemonList";
+import PostsManager from "../../features/posts/PostManager";
+import PostDetail from "../../features/posts/PostDetail";
 
 const FormPage = () => (
   <>
@@ -59,7 +61,9 @@ const PageRoute = () => (
         <Route path="/hoc" component={HocPage} />
         <Route path="/calendar" component={FullCalendarDemo} />
         <Route path="/rtkquery" component={RTCPage} />
-        <Redirect to="/counter" />
+        <Route path="/rtkmutation" component={PostsManager} />
+        <Route path="/rtkmutation/:id" component={PostDetail} />
+        {/* <Redirect to="/counter" /> */}
       </Switch>
     </Template>
   </BrowserRouter>

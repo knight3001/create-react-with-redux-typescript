@@ -8,12 +8,15 @@ interface PokemonProps {
 
 function Pokemon(props: PokemonProps) {
   // Using a query hook automatically fetches data and returns query values
-  const { data, error, isLoading, isFetching } = useGetPokemonByNameQuery(
-    props.name,
-    {
-      pollingInterval: props.pollingInterval,
-    }
-  );
+  const {
+    data,
+    error,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetPokemonByNameQuery(props.name, {
+    pollingInterval: props.pollingInterval,
+  });
 
   if (error) {
     return <>Oh no, there was an error</>;
@@ -31,6 +34,9 @@ function Pokemon(props: PokemonProps) {
           {isFetching ? "..." : ""}
         </h3>
         <img src={data.sprites.front_shiny} alt={data.species.name} />
+        <button type="button" onClick={refetch}>
+          Force re-fetch 1
+        </button>
       </>
     );
   }
