@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import monitorReducerEnhancer from "./monitorReducer";
 import loggerMiddleware from "./loggerMiddleware";
+import rtkQueryErrorLogger from "./rtkQueryErrorLogger";
 import rootReducer from "./reducers";
 import { pokemonApi } from "../services/pokemon";
 
@@ -19,6 +20,7 @@ function configureAppStore() {
         },
       })
         .concat(loggerMiddleware)
+        .concat(rtkQueryErrorLogger)
         .concat(pokemonApi.middleware),
     // preloadedState,
     enhancers: [monitorReducerEnhancer],
