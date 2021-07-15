@@ -156,7 +156,7 @@ function Menu(props: MenuProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Top Header - 1
+            Top Header
           </Typography>
         </Toolbar>
       </AppBar>
