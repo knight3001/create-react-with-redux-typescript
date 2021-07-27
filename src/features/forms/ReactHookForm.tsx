@@ -54,7 +54,6 @@ function ReactHookForm() {
               label="Filled"
               isRequired
               isInvalid
-              onEnter={() => console.log("blur")}
               helper="2323 232 323"
               rows={4}
               width="300px"

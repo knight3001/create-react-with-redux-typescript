@@ -96,6 +96,7 @@
         "ignoreFunctionalComponents": true
       }
     ],
-    "react/no-array-index-key": "warn"
+    "react/no-array-index-key": "warn",
+    "no-nested-ternary": "warn"
   }
 }

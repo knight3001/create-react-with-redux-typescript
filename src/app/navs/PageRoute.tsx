@@ -24,6 +24,7 @@ import WrappedComponent from "../../features/hoc/WrappedComponent";
 import PostsList from "../../features/rtkquery/PokemonList";
 import PostsManager from "../../features/posts/PostManager";
 import PostDetail from "../../features/posts/PostDetail";
+import PokemonTrail from "../../features/rtkTrail/PokemonTrail";
 
 const FormPage = () => (
   <>
@@ -63,6 +64,7 @@ const PageRoute = () => (
         <Route path="/rtkquery" component={RTCPage} />
         <Route path="/rtkmutation" component={PostsManager} />
         <Route path="/rtkmutation/:id" component={PostDetail} />
+        <Route path="/rtktrail" component={PokemonTrail} />
         {/* <Redirect to="/counter" /> */}
       </Switch>
     </Template>
