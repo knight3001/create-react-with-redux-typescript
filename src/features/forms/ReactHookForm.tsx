@@ -42,7 +42,9 @@ function ReactHookForm() {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
-      {process.env.NODE_ENV !== "production" && <DevTool control={control} />}
+      {process.env.NODE_ENV !== "production" && (
+        <DevTool control={control} placement="top-right" />
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="firstName"

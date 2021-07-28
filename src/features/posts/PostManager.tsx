@@ -20,13 +20,19 @@ import {
 import { MdBook } from "react-icons/md";
 import React, { useState } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
+import { v4 as uuid } from "uuid";
+
 import type { Post } from "../../app/types/post";
-import { useAddPostMutation, useGetPostsQuery } from "../../services/posts";
+import {
+  useAddPostMutation,
+  useGetPostsQuery,
+  useGetPostQuery,
+} from "../../services/posts";
 import PostDetail from "./PostDetail";
 
 const AddPost = () => {
-  const initialValue = { name: "" };
-  const [post, setPost] = useState<Pick<Post, "name">>(initialValue);
+  const initialValue: Post = { id: uuid(), name: "" };
+  const [post, setPost] = useState(initialValue);
   const [addPost, { isLoading }] = useAddPostMutation();
   const toast = useToast();
 
@@ -37,7 +43,9 @@ const AddPost = () => {
     }));
   };
 
-  const handleAddPost = async () => {
+  const handleAddPost = () => addPost(post).then(() => setPost(initialValue));
+
+  /* const handleAddPost = async () => {
     try {
       await addPost(post).unwrap();
       setPost(initialValue);
@@ -50,7 +58,7 @@ const AddPost = () => {
         isClosable: true,
       });
     }
-  };
+  }; */
 
   return (
     <Flex p={5}>
@@ -117,6 +125,40 @@ export const PostsCountStat = () => {
   );
 };
 
+const PostNameSubscribed = ({ id }: { id: string }) => {
+  const { data, isFetching } = useGetPostQuery(id);
+  const { push } = useHistory();
+
+  console.log("data", data, isFetching);
+
+  if (!data) return null;
+
+  return (
+    <ListItem key={id} onClick={() => push(`/rtkmutation/${id}`)}>
+      <ListIcon as={MdBook} color="green.500" /> {data.name}
+    </ListItem>
+  );
+};
+const PostListSubscribed = () => {
+  const { data: posts, isLoading } = useGetPostsQuery();
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  if (!posts) {
+    return <div>No posts :(</div>;
+  }
+
+  return (
+    <List spacing={3}>
+      {posts.map(({ id }) => (
+        <PostNameSubscribed id={id} key={id} />
+      ))}
+    </List>
+  );
+};
+
 const PostsManager = () => (
   <Box>
     <Flex bg="#011627" p={4} color="white">
@@ -139,11 +181,22 @@ const PostsManager = () => (
         <Box p={4}>
           <PostList />
         </Box>
+        <Box p={4} borderBottom="1px solid #eee">
+          <Heading size="sm">Posts (subscribed)</Heading>
+        </Box>
+        <Box p={4}>
+          <PostListSubscribed />
+        </Box>
       </Box>
       <Box flex={2}>
-        <Center h="200px">
-          <Heading size="md">Select a post to edit!</Heading>
-        </Center>
+        <Switch>
+          <Route path="/rtkmutation/:id" component={PostDetail} />
+          <Route>
+            <Center h="200px">
+              <Heading size="md">Select a post to edit!</Heading>
+            </Center>
+          </Route>
+        </Switch>
       </Box>
     </Flex>
   </Box>

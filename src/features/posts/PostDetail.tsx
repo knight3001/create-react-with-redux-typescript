@@ -137,7 +137,7 @@ const PostDetail = () => {
                 {isUpdating ? "Updating..." : "Edit"}
               </Button>
               <Button
-                onClick={() => deletePost(id).then(() => push("/posts"))}
+                onClick={() => deletePost(id).then(() => push("/rtkmutations"))}
                 disabled={isDeleting}
                 colorScheme="red"
               >
