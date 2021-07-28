@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { useGetPokemonByNameQuery } from "./hooks";
+// import { useGetPokemonByNameQuery } from "../../services/pokemon";
 
 function Bulbasaur() {
   const { data, isError, isLoading } = useGetPokemonByNameQuery("bulbasaur");

@@ -1,11 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-export interface Post {
-  id: string;
-  name: string;
-}
-
-type PostsResponse = Post[];
+import type { Post, PostsResponse } from "../app/types/post";
 
 function providesList<R extends { id: string | number }[], T extends string>(
   resultsWithIds: R | undefined,
@@ -45,6 +39,18 @@ export const api = createApi({
         method: "PUT",
         body: patch,
       }),
+      async onQueryStarted({ id, ...patch }, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          api.util.updateQueryData("getPost", id, (draft) => {
+            Object.assign(draft, patch);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
       invalidatesTags: (result, error, { id }) => [{ type: "Post", id }],
     }),
     deletePost: build.mutation<{ success: boolean; id: string }, string>({
