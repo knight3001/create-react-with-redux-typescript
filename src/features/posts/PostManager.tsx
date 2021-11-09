@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { MdBook } from "react-icons/md";
 import React, { useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 
 import type { Post } from "../../app/types/post";
@@ -91,20 +91,20 @@ const AddPost = () => {
 
 const PostList = () => {
   const { data: posts, isLoading } = useGetPostsQuery();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return <div>Loading</div>;
   }
 
   if (!posts) {
-    return <div>No posts :(</div>;
+    return <div>No posts : </div>;
   }
 
   return (
     <List spacing={3}>
       {posts.map(({ id, name }) => (
-        <ListItem key={id} onClick={() => push(`/rtkmutation/${id}`)}>
+        <ListItem key={id} onClick={() => navigate(`/rtkmutation/${id}`)}>
           <ListIcon as={MdBook} color="green.500" /> {name}
         </ListItem>
       ))}
@@ -127,14 +127,14 @@ export const PostsCountStat = () => {
 
 const PostNameSubscribed = ({ id }: { id: string }) => {
   const { data, isFetching } = useGetPostQuery(id);
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   console.log("data", data, isFetching);
 
   if (!data) return null;
 
   return (
-    <ListItem key={id} onClick={() => push(`/rtkmutation/${id}`)}>
+    <ListItem key={id} onClick={() => navigate(`/rtkmutation/${id}`)}>
       <ListIcon as={MdBook} color="green.500" /> {data.name}
     </ListItem>
   );
@@ -147,7 +147,7 @@ const PostListSubscribed = () => {
   }
 
   if (!posts) {
-    return <div>No posts :(</div>;
+    return <div>No posts :</div>;
   }
 
   return (
@@ -189,14 +189,16 @@ const PostsManager = () => (
         </Box>
       </Box>
       <Box flex={2}>
-        <Switch>
-          <Route path="/rtkmutation/:id" component={PostDetail} />
-          <Route>
-            <Center h="200px">
-              <Heading size="md">Select a post to edit!</Heading>
-            </Center>
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/rtkmutation/:id" element={<PostDetail />} />
+          <Route
+            element={
+              <Center h="200px">
+                <Heading size="md">Select a post to edit!</Heading>
+              </Center>
+            }
+          />
+        </Routes>
       </Box>
     </Flex>
   </Box>

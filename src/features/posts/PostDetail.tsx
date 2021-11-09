@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -72,8 +72,8 @@ const PostJsonDetail = ({ id }: { id: string }) => {
 };
 
 const PostDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  const { push } = useHistory();
+  const { id = "0" } = useParams();
+  const navigate = useNavigate();
 
   const toast = useToast();
 
@@ -137,7 +137,9 @@ const PostDetail = () => {
                 {isUpdating ? "Updating..." : "Edit"}
               </Button>
               <Button
-                onClick={() => deletePost(id).then(() => push("/rtkmutation"))}
+                onClick={() =>
+                  deletePost(id).then(() => navigate("/rtkmutation"))
+                }
                 disabled={isDeleting}
                 colorScheme="red"
               >

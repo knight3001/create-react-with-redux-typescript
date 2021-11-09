@@ -1,26 +1,24 @@
 // @flow
 import React, { ReactNode } from "react";
-import { withRouter } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
 import ErrorBoundary from "../ErrorBoundary";
 import Menu from "./Menu";
 import { myTheme } from "../styles/theme";
 
-type TemplatePropsType = {
-  children?: ReactNode;
-};
-
-function Template(props: TemplatePropsType) {
+function Template(props: ReactNode) {
   return (
     <MuiThemeProvider theme={myTheme}>
       <ErrorBoundary>
         <div>
-          <Menu>{props.children}</Menu>
+          <Menu>
+            <Outlet />
+          </Menu>
         </div>
       </ErrorBoundary>
     </MuiThemeProvider>
   );
 }
 
-export default withRouter(Template);
+export default Template;

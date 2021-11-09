@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Template from "./Template";
 import Counter from "../../features/counter/Counter";
@@ -53,21 +47,21 @@ const RTCPage = () => (
 
 const PageRoute = () => (
   <BrowserRouter basename="">
-    <Template>
-      <Switch>
-        <Route path="/counter" component={Counter} />
-        <Route path="/users" component={UsersList} />
-        <Route path="/todos" component={LoadTodos} />
-        <Route path="/forms" component={FormPage} />
-        <Route path="/hoc" component={HocPage} />
-        <Route path="/calendar" component={FullCalendarDemo} />
-        <Route path="/rtkquery" component={RTCPage} />
-        <Route path="/rtkmutation" component={PostsManager} />
-        <Route path="/rtkmutation/:id" component={PostDetail} />
-        <Route path="/rtktrail" component={PokemonTrail} />
+    <Routes>
+      <Route path="/" element={<Template />}>
+        <Route path="/counter" element={<Counter />} />
+        <Route path="/users" element={<UsersList />} />
+        <Route path="/todos" element={<LoadTodos />} />
+        <Route path="/forms" element={<FormPage />} />
+        <Route path="/hoc" element={<HocPage />} />
+        <Route path="/calendar" element={<FullCalendarDemo />} />
+        <Route path="/rtkquery" element={<RTCPage />} />
+        <Route path="/rtkmutation" element={<PostsManager />} />
+        <Route path="/rtkmutation/:id" element={<PostDetail />} />
+        <Route path="/rtktrail" element={<PokemonTrail />} />
         {/* <Redirect to="/counter" /> */}
-      </Switch>
-    </Template>
+      </Route>
+    </Routes>
   </BrowserRouter>
 );
 
