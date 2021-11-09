@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
 const basePalette = {
   common: {
@@ -11,7 +11,7 @@ const basePalette = {
   },
 };
 
-const baseTheme = createMuiTheme({
+const baseTheme = createTheme({
   overrides: {
     MuiTableHead: {
       root: {
@@ -50,7 +50,7 @@ const baseTheme = createMuiTheme({
   },
 });
 
-export const myTheme = createMuiTheme({
+export const myTheme = createTheme({
   ...baseTheme,
   palette: {
     ...basePalette,

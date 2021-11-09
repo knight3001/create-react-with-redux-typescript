@@ -192,6 +192,7 @@ const PostsManager = () => (
         <Routes>
           <Route path="/rtkmutation/:id" element={<PostDetail />} />
           <Route
+            index
             element={
               <Center h="200px">
                 <Heading size="md">Select a post to edit!</Heading>
