@@ -20,6 +20,7 @@ import PostsManager from "../../features/posts/PostManager";
 import PostDetail from "../../features/posts/PostDetail";
 import PokemonTrail from "../../features/rtkTrail/PokemonTrail";
 import Play from "../../features/react-router/Play";
+import Tdd from "../../features/Tdd";
 
 const FormPage = () => (
   <>
@@ -61,6 +62,7 @@ const PageRoute = () => (
         <Route path="/rtkmutation/:id" element={<PostDetail />} />
         <Route path="/rtktrail" element={<PokemonTrail />} />
         <Route path="/react-router/*" element={<Play />} />
+        <Route path="/tdd" element={<Tdd />} />
         {/* <Redirect to="/counter" /> */}
       </Route>
     </Routes>

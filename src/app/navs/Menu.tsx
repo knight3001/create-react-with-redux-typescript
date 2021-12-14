@@ -95,6 +95,7 @@ const navs = [
   { url: "/rtkmutation", text: "RTK Mutation" },
   { url: "/rtktrail", text: "RTK Trail" },
   { url: "/react-router", text: "React Router" },
+  { url: "/tdd", text: "TDD" },
 ];
 
 interface ListItemLinkProps {
