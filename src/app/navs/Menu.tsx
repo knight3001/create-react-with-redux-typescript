@@ -159,7 +159,7 @@ function Menu(props: MenuProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Top Header asda sd main branch
+            Top Header
           </Typography>
         </Toolbar>
       </AppBar>
